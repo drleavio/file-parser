@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardHeader, CardContent } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
 import axios from "axios";
+import { useRouter } from "next/navigation";
 
 export default function FileUploader() {
   const [files, setFiles] = useState([]);
@@ -12,6 +13,7 @@ export default function FileUploader() {
   const [uploading, setUploading] = useState(false);
   const inputRef = useRef(null);
   const [loading,setLoading]=useState(false);
+  const router = useRouter();
 
   const handleFiles = (selected) => {
     const newFiles = Array.from(selected);
@@ -54,6 +56,7 @@ async function getPublicIp() {
       console.log("Entry ID:", data.id);
       
       alert("File parsed successfully!");
+      router.push(`/view`);
     } else if (data.error) {
        alert("Upload failed: " + data.error);
     } else {
